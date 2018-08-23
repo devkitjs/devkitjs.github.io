@@ -5,5 +5,9 @@
   "main": "index.js",
   "repository": "https://github.com/devkitjs/devkitjs.github.io.git",
   "author": "Eduard <contactme@eduardmalakhov.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2"
+  }
 }
