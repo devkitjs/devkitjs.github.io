@@ -1,6 +1,6 @@
 import React, { Component, ReactNode } from 'react';
 
-class Application extends Component {
+class ApplicationFramework extends Component {
     render() {
         return (
             <div>

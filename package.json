@@ -1,13 +1,13 @@
 {
   "name": "devkitjs.github.io",
-  "version": "0",
-  "description": "0.1.0",
+  "version": "0.1.0",
   "main": "index.js",
   "repository": "https://github.com/devkitjs/devkitjs.github.io.git",
   "author": "Eduard <contactme@eduardmalakhov.com>",
   "homepage": "https://devkitjs.github.io",
   "license": "MIT",
   "scripts": {
+    "build": "webpack",
     "predeploy": "yarn run build",
     "deploy": "gh-pages -b master -d build"
   },
@@ -17,7 +17,17 @@
     "react-dom": "^16.4.2"
   },
   "devDependencies": {
+    "@babel/cli": "^7.0.0-rc.2",
+    "@babel/core": "^7.0.0-rc.2",
+    "@babel/preset-env": "^7.0.0-rc.2",
+    "@babel/preset-react": "^7.0.0-rc.2",
+    "@babel/register": "^7.0.0-rc.2",
     "@types/react": "^16.4.11",
-    "@types/react-dom": "^16.0.7"
+    "@types/react-dom": "^16.0.7",
+    "babel-loader": "^8.0.0-beta.2",
+    "typescript": "^3.0.1",
+    "webpack": "^4.17.1",
+    "webpack-cli": "^3.1.0",
+    "webpack-dev-server": "^3.1.5"
   }
 }
