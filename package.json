@@ -1,0 +1,9 @@
+{
+  "name": "devkitjs.github.io",
+  "version": "0",
+  "description": "0.1.0",
+  "main": "index.js",
+  "repository": "https://github.com/devkitjs/devkitjs.github.io.git",
+  "author": "Eduard <contactme@eduardmalakhov.com>",
+  "license": "MIT"
+}
