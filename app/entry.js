@@ -1,5 +1,6 @@
-import { ReactDOM } from 'react-dom';
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-import ApplicationFramework from './components/ApplicationFramework.jsx';
+import ApplicationFramework from './components/ApplicationFramework';
 
-ReactDOM.render(<ApplicationFramework />, document.body)
+ReactDOM.render(<ApplicationFramework />, document.getElementById('application-framework-container'));
