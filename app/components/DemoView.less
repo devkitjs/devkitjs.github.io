@@ -1,0 +1,275 @@
+@demo-overlay-size-collapsed: 120px;
+@demo-overlay-size-inflated: 130px;
+@demo-overlay-size-fullscreen: 200%;
+
+@demo-overlay-inflation-duration: .15s;
+@demo-overlay-inflation-function: ease-out;
+
+@demo-overlay-fullscreen-inflation-duration: 2s;
+@demo-overlay-fullscreen-inflation-function: ease-out;
+
+@background-expansion-coefficient: 2;
+
+@keyframes background-expansion-width-first {
+    0% {
+        width: 0;
+        height: 0;
+
+        border-top-right-radius: 100%;
+    }
+
+    100% {
+        width: @background-expansion-coefficient * 100vw;
+        height: @background-expansion-coefficient * 100vw;
+
+        border-top-right-radius: 100%;
+    }
+}
+
+@keyframes background-expansion-height-first {
+    0% {
+        width: 0;
+        height: 0;
+
+        border-top-right-radius: 100%;
+    }
+
+    100% {
+        width: @background-expansion-coefficient * 100vh;
+        height: @background-expansion-coefficient * 100vh;   
+
+        border-top-right-radius: 100%;
+    }
+}
+
+@keyframes content {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.demo-view {
+    position: absolute;
+
+    width: 100vw;
+    height: 100vh;
+
+    .demo-view__background {
+        position: absolute;
+
+        bottom: 0;
+        left: 0;
+
+        width: 100%;
+        height: 100%;
+
+        background-color: white;
+
+        @media screen and (orientation: portrait) {
+            animation-name: background-expansion-height-first;
+        }
+
+        @media screen and (orientation: landscape) {
+            animation-name: background-expansion-width-first;
+        }
+    }
+
+    .demo-view__body {
+        position: relative;
+
+        // display: flex;
+
+        // flex-direction: row;
+
+        height: 100%;
+
+        animation-name: content;
+
+        animation-duration: 0.8s;
+        animation-fill-mode: forwards;
+
+        opacity: 0;
+
+        align-content: center;
+        justify-content: left;
+
+        width: 100%;
+
+        margin: auto;
+    }
+
+    .demo-view__header {
+        position: relative;
+
+        font-size: 30pt;
+        font-weight: 100;
+
+        text-align: center;
+
+        color: #720080;
+
+        padding: 60px 0 0 0;
+    }
+
+    .demo-overlay-outer {
+        position: absolute;
+    
+        top: 100%;
+        right: 100%;
+        
+        width: @demo-overlay-size-collapsed;
+        height: @demo-overlay-size-collapsed;
+        
+        &:hover {
+            width: @demo-overlay-size-inflated;
+            height: @demo-overlay-size-inflated;
+        }
+    
+        transition: all @demo-overlay-inflation-duration @demo-overlay-inflation-function;
+    
+        &[data-display-mode='fullscreen'] {
+            top: 50%;
+            right: 50%;
+    
+            width: @demo-overlay-size-fullscreen;
+            height: @demo-overlay-size-fullscreen;
+            
+            .demo-overlay-inner {
+                cursor: default;
+            }
+    
+            .demo-overlay-content {
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+    }
+    
+    .demo-overlay-inner {
+        position: relative;
+    
+        left: 50%;
+        top: -50%;
+    
+        width: 100%;
+        height: 100%;
+    
+        border-radius: 50%;
+    
+        background-color: white;    
+    
+        overflow: hidden;
+    }
+    
+    .demo-overlay-cursor-surface {
+        position: absolute;
+    
+        left: 50%;
+        top: -50%;
+    
+        width: @demo-overlay-size-collapsed;
+        height: @demo-overlay-size-collapsed;
+    
+        border-radius: 50%;
+    
+        cursor: pointer;
+    
+        z-index: 10;
+    }
+    
+    .demo-overlay-content {
+        display: flex;
+    
+        position: fixed;
+    
+        top: 0;
+        left: 0;
+    
+        width: 100vw;
+        height: 100vh;
+    
+        visibility: hidden;
+    
+        opacity: 0;
+    
+        transition: opacity .6s ease-in;
+        transition-delay: @demo-overlay-inflation-duration;
+    }
+    
+    .demo-overlay-content-inner {
+        width: 100%;
+        max-width: 800px;
+    
+        margin: auto;
+    }
+
+    .terminals {
+        width: 100%;
+    
+        display: flex;
+    
+        flex-direction: row;
+    
+        .terminal-section {
+            width: 50%;
+    
+            padding: 20px;
+        }
+    }
+
+    .start-demo-button-panel {
+        display: flex;
+
+        flex-direction: row;
+
+        justify-content: center;
+
+        margin: 10px;
+
+        .start-demo-button {    
+            color: white;
+    
+            text-align: center;
+    
+            padding: 15px 20px;
+        
+            border-radius: 8px;
+        
+            background-color: gray;
+        
+            user-select: none;
+    
+            user-select: none;
+    
+            &[data-enabled=true] {
+                background-color: green;
+    
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+
+.demo-view__page-selector {
+    position: relative;
+
+    top: 0;
+
+    width: 200%;
+    height: 100%;
+
+    &[data-page='1'] {
+        left: 0;
+    }
+
+    &[data-page='2'] {
+        left: -100%;
+    }
+
+    transition: left .8s ease-in-out;
+}

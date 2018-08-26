@@ -1,0 +1,106 @@
+.toolset-configurator {
+    .toolset-configurator__category {
+        margin: 12px 0;
+
+        //border-top: 1px solid silver;
+
+        .toolset-configurator__category__header {
+            //padding: 4px;
+
+            font-size: 12pt;
+
+            text-align: center;
+
+            color: gray;
+
+            font-weight: 100;
+        }
+
+        .toolset-configurator__category__body {
+            display: flex;
+
+            flex-direction: row;
+
+            justify-content: center;
+
+            padding: 4px;
+
+            .button {
+                position: relative;
+
+                background-color: #f1f1f1;
+
+                border-radius: 4px;
+
+                margin: 4px;
+                
+                color: #720080;
+
+                cursor: pointer;
+
+                overflow: hidden;
+
+                .label {
+                    position: relative;
+                    padding: 10px;
+
+                    user-select: none;
+                }
+
+                .selection {
+                    position: absolute;
+
+                    left: 0;
+                    bottom: 0;
+
+                    width: 100%;
+                    height: 4px;
+
+                    visibility: hidden;
+
+                    background-color: #720080;
+
+                    transition: height 0.1s ease-out;
+                }
+
+                &:hover {
+                    .selection {
+                        visibility: visible;
+                    }
+                }
+
+                &[data-state="selected"] {
+                    .selection {
+                        background-color: #720080;
+
+                        height: 100%;
+
+                        visibility: visible;
+                    }
+
+                    .label {
+                        color: white;
+                    }
+                }
+
+                &[data-state="dependency"] {
+                    .selection {
+                        background-color: red;
+
+                        height: 100%;
+
+                        visibility: visible;
+                    }
+
+                    .label {
+                        color: white;
+                    }
+                }
+            }
+        }        
+    }
+
+    .tools-counter {
+        text-align: center;
+    }
+}

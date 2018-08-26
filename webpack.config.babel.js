@@ -36,7 +36,8 @@ export default env => {
                     ],
                     loader: "babel-loader",
                     options: {
-                        presets: ["@babel/env", "@babel/react", "@babel/typescript"]
+                        presets: ["@babel/env", "@babel/react", "@babel/typescript"],
+                        plugins: ["@babel/proposal-class-properties"]
                     }
                 },
                 {

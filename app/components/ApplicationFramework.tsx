@@ -1,61 +1,68 @@
 import React, { Component, ReactNode } from 'react';
 
-import { Follow } from 'react-twitter-widgets';
-import { TwitterTimelineEmbed, TwitterShareButton, TwitterFollowButton, TwitterHashtagButton, TwitterMentionButton, TwitterTweetEmbed, TwitterMomentShare, TwitterDMButton, TwitterVideoEmbed, TwitterOnAirButton } from 'react-twitter-embed';
+import Rx from 'rx';
+import { mapTo, delay } from 'rxjs/operators';
 
+import MainView from './MainView';
+import DemoView from './DemoView';
+import ViewToggle from './ViewToggle';
+
+import ApplicationOverlay from './ApplicationOverlay';
+
+import ToolsCatalogue from '../config/ToolsCatalogue';
 
 import './ApplicationFramework.less';
 
-import TerminalPromptImage from './../assets/terminal-prompt.svg';
+//  Configuration
+import tools from '../config/ToolsCatalogue';
 
 type ApplicationFrameworkState = {
-    displayMode: string,
-    toolsAndTechnologies: Array<{key: string, name: string, selectionState: string, dependencies: string[], duration: number}>
+    demoOn?: boolean;
+    toolsAndTechnologies?: Array<{key: string, name: string, selectionState: string, dependencies: string[], duration: number}>;
+    terminalIOStream?: Rx.Observable<string>;
 };
 
-const alternativeDisplayMode = {
-    fullscreen: 'collapsed',
-    collapsed: 'fullscreen'
-};
+const SAMPLE_LINES = [
+    'yarn add --dev @babel/code @babel/cli @babel/typescript',
+    'yarn add --dev grunt grunt-typescript', 
+    'yarn add react react-dom'
+];
 
-const supportedToolsAndTechnologies = {
-    git: {
-        name: 'Git',
-        description: 'Doing git...'
+const WAVE_PARAMETERS = [
+    {
+        duration: '6s',
+        delay: '2s',
+        width: '3px',
+        color: '#580063'
     },
-    node: {
-        name: 'NodeJs',
-        description: 'Doing Node...'
+    {
+        duration: '4s',
+        delay: '0s',
+        width: '3px',
+        color: '#580063'
     },
-    babel: { 
-        name: 'Babel',
-        description: 'Doing Babel...',
-        dependencies: ['node']
+    {
+        duration: '7s',
+        delay: '1s',
+        width: '3px',
+        color: '#580063'
     },
-    reactJs: { 
-        name: 'ReactJs',
-        description: 'Doing ReactJs...',
-        dependencies: ['node']
-    },
-    grunt: { 
-        name: 'Grunt',
-        description: 'Doing Grunt...',
-        dependencies: ['node']
-    },
-    express: { 
-        name: 'Express',
-        description: 'Doing Express...',
-        dependencies: ['node']
+    {
+        duration: '5s',
+        delay: '3s',
+        width: '3px',
+        color: '#580063'
     }
-};
+];
 
 class ApplicationFramework extends Component<{}, ApplicationFrameworkState> {
     constructor(props: {}) {
         super(props);
 
         this.state = {
-            displayMode: 'collapsed',
-            toolsAndTechnologies: Object.keys(supportedToolsAndTechnologies).map( key => ({ ...supportedToolsAndTechnologies[key], key, selectionState: 'none' }))
+            demoOn: false,
+            toolsAndTechnologies: [],//Object.keys(ToolsAndTechnologies).map( key => ({ ...ToolsAndTechnologies[key], key, selectionState: 'none' })),
+            terminalIOStream: null
         };
     }
 
@@ -63,109 +70,34 @@ class ApplicationFramework extends Component<{}, ApplicationFrameworkState> {
         document.title = 'devkitjs';
     }
 
-    private toggleDisplayMode(): void {
-        this.setState({ displayMode: alternativeDisplayMode[this.state.displayMode] });
-    }
+    _toggleView(): void {
+        console.log('Toggle view');
 
-    private toggleToolOrTechnologySelector(key: string): void {
-        console.log(`toggleToolOrTechnologySelector, key = ${key}`);
-
-        this.setState(s => { 
-            var item = s.toolsAndTechnologies.find(i => i.key === key);
-
-            if (item.selectionState === 'none') {
-                item.selectionState = 'selected';
-            } else {
-                if (item.selectionState === 'selected') {
-                    item.selectionState = 'none';
-                }
-            }
-
-            return s;
-         });
+        this.setState(state => ({ demoOn: !state.demoOn }));
     }
 
     render() {
+        console.log('Render ApplicationFramework');
+
         return (
             <div className='application-framework'>
+                <MainView />
 
-                <div className="title">
-                    devkitjs
-                </div>
-                <div className="sub-title">
-                    A tool that does all routine work configuring your Node.js development environment while you can focus on what really matters.
-                </div>
-                <div>
-                    <Follow username="devkitjs" options={{ size: "large", showCount: false }} />
-                </div>
-                <div className="demo-overlay-outer" data-display-mode={ this.state.displayMode } >
-                    <div className="demo-overlay-inner">
-                        <div className="demo-overlay-content">
-                            <div className="demo-overlay-content-inner">
-                                <div className="tools-and-technologies-selector">
-                                    {
-                                        this.state.toolsAndTechnologies.map(item => (
-                                            <div className="" data-selection-state={ item.selectionState } onClick={ e => this.toggleToolOrTechnologySelector(item.key) } key={item.key}>
-                                                { item.name }
-                                            </div>
-                                        ))
-                                    }
-                                </div>
-                                <div className="demo-buttons">
-                                    <div className="start-demo-button">
-                                        Start demo
-                                    </div>
-                                </div>
-                                <div className="terminals">
-                                    <div className="terminal-section devkit-terminal-section">
-                                        <div className="terminal-window">
-                                            <div className="frame">
-                                                <div className="button button-1">
-
-                                                </div>
-                                                <div className="button button-2">
-
-                                                </div>
-                                                <div className="button button-3">
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="terminal-section regular-terminal-section">
-                                        <div className="terminal-window">
-                                            <div className="frame">
-                                                <div className="button button-1">
-
-                                                </div>
-                                                <div className="button button-2">
-
-                                                </div>
-                                                <div className="button button-3">
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="demo-overlay-cursor-surface" onClick={ e => this.toggleDisplayMode() }>
-   
-                    </div>
-                </div>
-
-                <a href="https://github.com/devkitjs">
-                    <img 
-                        style={{position: 'absolute', top: 0, right: 0, border: 0}}
-                        src="https://s3.amazonaws.com/github/ribbons/forkme_right_white_ffffff.png" 
-                        alt="Fork me on GitHub"/>
-                </a>
-
-                <div className="terminal-prompt">
-                    <TerminalPromptImage />
-                </div>
+                {
+                    this.state.demoOn ? (
+                        <DemoView 
+                            tools={ ToolsCatalogue.tools }
+                            toolCategories={ ToolsCatalogue.categories } />
+                    ) : null
+                }
+                
+                <ViewToggle 
+                    radiation={{ 
+                        enabled: !this.state.demoOn,
+                        waves: WAVE_PARAMETERS 
+                    }} 
+                    onClick={ () => this._toggleView() }/>
+                <ApplicationOverlay />
             </div>
         );
     }
