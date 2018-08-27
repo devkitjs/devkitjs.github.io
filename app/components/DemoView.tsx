@@ -137,20 +137,19 @@ class DemoView extends Component<DemoViewProperties, DemoViewState> {
                                         data-enabled={ this.state.numberOfSelectedTools > 0 }
                                         onClick={ () => this.state.numberOfSelectedTools > 0 && this._startDemo() } 
                                     >
-                                        Start demo
+                                        Show me the demo
                                     </div>
                                 </div>
                             </DemoViewPageSection>
                         </DemoViewPage>
                         <DemoViewPage>
-                            <DemoViewPageSection title="Step 2. Select tools that you usually use in projects" >
-                                <div className="start-demo-button-panel">
-                                    <div className="start-demo-button" 
-                                        data-enabled={ this.state.numberOfSelectedTools > 0 }
-                                        onClick={ () => this.state.numberOfSelectedTools > 0 && this._startDemo() } 
-                                    >
-                                        Start demo
-                                    </div>
+                            <DemoViewPageSection title="Step 2. Scroll down to see how devkitjs compares to a traditional approach" >
+                                {/* <div className="scrollDownButton">
+                                
+                                </div> */}
+                                <div className="demo-view__simulators-panel">
+                                    <TerminalSimulator width='40%' height='50vh' />
+                                    <TerminalSimulator width='40%' height='50vh'  />
                                 </div>
                             </DemoViewPageSection>
                         </DemoViewPage>

@@ -1,4 +1,10 @@
 .demo-view-page-section {
+    height: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
     .demo-view-page-section__header {
         font-size: 18pt;
         font-weight: 100;
@@ -8,5 +14,19 @@
         color: #720080;
 
         padding: 20px;
+
+        flex-grow: 0;
+    }
+
+    .demo-view-page-section__content {
+        display: flex;
+
+        flex-direction: column;
+        
+        justify-content: center;
+
+        flex-grow: 1;
+
+        //height: 100%;
     }
 }
