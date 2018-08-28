@@ -8,9 +8,9 @@
 @demo-overlay-fullscreen-inflation-duration: 2s;
 @demo-overlay-fullscreen-inflation-function: ease-out;
 
-@background-expansion-coefficient: 2;
+@background-expansion-factor: 2;
 
-@keyframes background-expansion-width-first {
+@keyframes background-expansion-width-bound {
     0% {
         width: 0;
         height: 0;
@@ -19,14 +19,14 @@
     }
 
     100% {
-        width: @background-expansion-coefficient * 100vw;
-        height: @background-expansion-coefficient * 100vw;
+        width: @background-expansion-factor * 100vw;
+        height: @background-expansion-factor * 100vw;
 
         border-top-right-radius: 100%;
     }
 }
 
-@keyframes background-expansion-height-first {
+@keyframes background-expansion-height-bound {
     0% {
         width: 0;
         height: 0;
@@ -35,8 +35,8 @@
     }
 
     100% {
-        width: @background-expansion-coefficient * 100vh;
-        height: @background-expansion-coefficient * 100vh;   
+        width: @background-expansion-factor * 100vh;
+        height: @background-expansion-factor * 100vh;   
 
         border-top-right-radius: 100%;
     }
@@ -78,11 +78,11 @@
         background-color: white;
 
         @media screen and (orientation: portrait) {
-            animation-name: background-expansion-height-first;
+            animation-name: background-expansion-height-bound;
         }
 
         @media screen and (orientation: landscape) {
-            animation-name: background-expansion-width-first;
+            animation-name: background-expansion-width-bound;
         }
     }
 
@@ -103,9 +103,6 @@
         justify-content: center;
 
         color: #720080;
-        //flex-grow: 1;
-
-        //padding: 60px 0 0 0;
     }
 
     .demo-view__body {
@@ -119,14 +116,6 @@
 
         flex-grow: 1;
 
-        // display: flex;
-
-        // flex-direction: row;
-
-        //height: 100%;
-
-        //flex-grow: 1;
-
         animation-name: content;
 
         animation-duration: 0.8s;
@@ -134,120 +123,7 @@
 
         opacity: 0;
 
-        // align-content: center;
-        // justify-content: left;
-
         width: 100%;
-
-        //margin: auto;
-    }
-
-
-
-    .demo-overlay-outer {
-        position: absolute;
-    
-        top: 100%;
-        right: 100%;
-        
-        width: @demo-overlay-size-collapsed;
-        height: @demo-overlay-size-collapsed;
-        
-        &:hover {
-            width: @demo-overlay-size-inflated;
-            height: @demo-overlay-size-inflated;
-        }
-    
-        transition: all @demo-overlay-inflation-duration @demo-overlay-inflation-function;
-    
-        &[data-display-mode='fullscreen'] {
-            top: 50%;
-            right: 50%;
-    
-            width: @demo-overlay-size-fullscreen;
-            height: @demo-overlay-size-fullscreen;
-            
-            .demo-overlay-inner {
-                cursor: default;
-            }
-    
-            .demo-overlay-content {
-                opacity: 1;
-                visibility: visible;
-            }
-        }
-    }
-    
-    .demo-overlay-inner {
-        position: relative;
-    
-        left: 50%;
-        top: -50%;
-    
-        width: 100%;
-        height: 100%;
-    
-        border-radius: 50%;
-    
-        background-color: white;    
-    
-        overflow: hidden;
-    }
-    
-    .demo-overlay-cursor-surface {
-        position: absolute;
-    
-        left: 50%;
-        top: -50%;
-    
-        width: @demo-overlay-size-collapsed;
-        height: @demo-overlay-size-collapsed;
-    
-        border-radius: 50%;
-    
-        cursor: pointer;
-    
-        z-index: 10;
-    }
-    
-    .demo-overlay-content {
-        display: flex;
-    
-        position: fixed;
-    
-        top: 0;
-        left: 0;
-    
-        width: 100vw;
-        height: 100vh;
-    
-        visibility: hidden;
-    
-        opacity: 0;
-    
-        transition: opacity .6s ease-in;
-        transition-delay: @demo-overlay-inflation-duration;
-    }
-    
-    .demo-overlay-content-inner {
-        width: 100%;
-        max-width: 800px;
-    
-        margin: auto;
-    }
-
-    .terminals {
-        width: 100%;
-    
-        display: flex;
-    
-        flex-direction: row;
-    
-        .terminal-section {
-            width: 50%;
-    
-            padding: 20px;
-        }
     }
 
     .start-demo-button-panel {

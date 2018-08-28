@@ -1,5 +1,6 @@
 //  Node modules
 import React, { Component, ReactNode } from 'react';
+import { Link } from 'react-router-dom';
 
 //  Styles
 import './ViewToggle.less';
@@ -28,7 +29,7 @@ type ViewToggleProperties = {
         enabled?: boolean;
         waves: RadiationWaveParameters[];
     };
-    onClick?: React.MouseEventHandler;
+    linkRoutePath: string;
 }
 
 class ViewToggle extends Component<ViewToggleProperties, ViewToggleState> {
@@ -41,6 +42,8 @@ class ViewToggle extends Component<ViewToggleProperties, ViewToggleState> {
     }
 
     render(): ReactNode {
+        //console.log(`Location: ${this.props.location.pathname}`);
+
         return (
             <div className="view-toggle" >
                 {
@@ -61,12 +64,13 @@ class ViewToggle extends Component<ViewToggleProperties, ViewToggleState> {
                     </div>
                     ) : null
                 }
-                
-                <div className={ "surface" + (this.props.radiation && this.props.radiation.enabled  ? "" : " no-border") } onClick={ this.props.onClick }>
-                    <div className="terminal-prompt">
-                        <TerminalPromptImage /> 
-                    </div>
-                </div>
+
+                <Link className={ "surface" + (this.props.radiation && this.props.radiation.enabled  ? "" : " no-border") } 
+                    to={{ pathname: this.props.linkRoutePath }} >
+                        <div className="terminal-prompt">
+                            <TerminalPromptImage /> 
+                        </div>
+                </Link>
             </div>
         );  
     }

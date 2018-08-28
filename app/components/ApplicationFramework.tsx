@@ -1,5 +1,7 @@
 import React, { Component, ReactNode } from 'react';
 
+import { HashRouter, Route, Link } from 'react-router-dom';
+
 import Rx from 'rx';
 
 import MainView from './MainView';
@@ -59,7 +61,11 @@ const WAVE_PARAMETERS = [
     }
 ];
 
-class ApplicationFramework extends Component<{}, ApplicationFrameworkState> {
+type ApplicationFrameworkProperties = {
+    path?: string;
+}
+
+class ApplicationFramework extends Component<ApplicationFrameworkProperties, ApplicationFrameworkState> {
     constructor(props: {}) {
         super(props);
 
@@ -85,22 +91,20 @@ class ApplicationFramework extends Component<{}, ApplicationFrameworkState> {
 
         return (
             <div className='application-framework'>
+            
                 <MainView />
 
-                {
-                    this.state.demoOn ? (
-                        <DemoView 
-                            tools={ ToolsCatalogue.tools }
-                            toolCategories={ ToolsCatalogue.categories } />
-                    ) : null
-                }
+                <Route exact path="/demo" render={() => <DemoView 
+                    tools={ ToolsCatalogue.tools }
+                    toolCategories={ ToolsCatalogue.categories } /> } />
                 
-                <ViewToggle 
+                <Route path="/" render={ props => <ViewToggle 
                     radiation={{ 
-                        enabled: !this.state.demoOn,
+                        enabled: props.location.pathname === '/',
                         waves: WAVE_PARAMETERS 
                     }} 
-                    onClick={ () => this._toggleView() }/>
+                    linkRoutePath={ props.location.pathname === '/' ? '/demo' : '/' }/> } />
+                
                 <ApplicationOverlay />
             </div>
         );
