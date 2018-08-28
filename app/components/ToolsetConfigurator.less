@@ -2,12 +2,8 @@
     .toolset-configurator__category {
         margin: 12px 0;
 
-        //border-top: 1px solid silver;
-
         .toolset-configurator__category__header {
-            //padding: 4px;
-
-            font-size: 12pt;
+            font-size: 1.2rem;
 
             text-align: center;
 
@@ -44,6 +40,8 @@
                     position: relative;
                     padding: 10px;
 
+                    font-size: 1rem;
+
                     user-select: none;
                 }
 
@@ -63,11 +61,11 @@
                     transition: height 0.1s ease-out;
                 }
 
-                &:hover {
-                    .selection {
-                        visibility: visible;
-                    }
-                }
+                // &:hover {
+                //     .selection {
+                //         visibility: visible;
+                //     }
+                // }
 
                 &[data-state="selected"] {
                     .selection {
@@ -102,5 +100,19 @@
 
     .tools-counter {
         text-align: center;
+    }
+}
+
+.no-touchevents {
+    .toolset-configurator {
+        .toolset-configurator__category__body {
+            .button {
+                &:hover {
+                    .selection {
+                        visibility: visible;
+                    }
+                }
+            }
+        }
     }
 }

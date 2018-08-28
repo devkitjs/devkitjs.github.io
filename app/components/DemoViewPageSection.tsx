@@ -15,8 +15,11 @@ class DemoViewPageSection extends Component<DemoViewPageProperties> {
                 <div className="demo-view-page-section__header">
                     { this.props.title }
                 </div>
-                <div className="demo-view-page-section__content">
-                    { this.props.children }
+                <div className="demo-view-page-section__body">
+                    <div>
+                        { this.props.children }
+                    </div>
+                    
                 </div>
             </div>
         );

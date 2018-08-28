@@ -1,7 +1,6 @@
 import React, { Component, ReactNode } from 'react';
 
 import Rx from 'rx';
-import { mapTo, delay } from 'rxjs/operators';
 
 import MainView from './MainView';
 import DemoView from './DemoView';
@@ -12,6 +11,11 @@ import ApplicationOverlay from './ApplicationOverlay';
 import ToolsCatalogue from '../config/ToolsCatalogue';
 
 import './ApplicationFramework.less';
+
+import ReactGA from 'react-ga';
+
+ReactGA.initialize('UA-124748437-1');
+ReactGA.pageview(window.location.pathname + window.location.search);
 
 //  Configuration
 import tools from '../config/ToolsCatalogue';

@@ -3,6 +3,8 @@ import path from 'path';
 import dotenv from 'dotenv';
 
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import ModernizrWebpackPlugin from 'modernizr-webpack-plugin';
+import HtmlWebpackIncludeAssetsPlugin from 'html-webpack-include-assets-plugin';
 
 dotenv.config();
 
@@ -15,7 +17,10 @@ export default env => {
             filename: "bundle.js"
         },
         resolve: {
-            extensions: ['.js', '.jsx', '.ts', '.tsx', '.json']
+            extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
+            alias: {
+                modernizr$: path.resolve(__dirname, "./.modernizrrc")
+            }
         },
         module: {
             rules: [
@@ -74,7 +79,16 @@ export default env => {
         plugins: [
             new HtmlWebpackPlugin({
                 template: './app/index-template.html'
-            })
+            }),
+            new ModernizrWebpackPlugin({
+                'options': [
+                    'setClasses'
+                ],
+                'feature-detects': [
+                    'touchevents'
+                ]
+            }),
+            new HtmlWebpackIncludeAssetsPlugin({ assets: ['modernizr-bundle.js'], append: true })
         ],
         devServer: {
             contentBase: path.join(__dirname, 'dist'),

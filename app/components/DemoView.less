@@ -55,6 +55,14 @@
 .demo-view {
     position: absolute;
 
+    display: flex;
+
+    justify-content: space-around;
+
+    justify-items: center;
+
+    flex-direction: column;
+
     width: 100vw;
     height: 100vh;
 
@@ -78,14 +86,46 @@
         }
     }
 
+    .demo-view__header {
+        display: flex;
+
+        flex-direction: column;
+
+        position: relative;
+
+        flex-grow: .5;
+
+        font-size: 3rem;
+        font-weight: 100;
+
+        text-align: center;
+
+        justify-content: center;
+
+        color: #720080;
+        //flex-grow: 1;
+
+        //padding: 60px 0 0 0;
+    }
+
     .demo-view__body {
         position: relative;
+
+        display: flex;
+
+        flex-direction: column;
+
+        justify-content: center;
+
+        flex-grow: 1;
 
         // display: flex;
 
         // flex-direction: row;
 
-        height: 100%;
+        //height: 100%;
+
+        //flex-grow: 1;
 
         animation-name: content;
 
@@ -94,26 +134,15 @@
 
         opacity: 0;
 
-        align-content: center;
-        justify-content: left;
+        // align-content: center;
+        // justify-content: left;
 
         width: 100%;
 
-        margin: auto;
+        //margin: auto;
     }
 
-    .demo-view__header {
-        position: relative;
 
-        font-size: 30pt;
-        font-weight: 100;
-
-        text-align: center;
-
-        color: #720080;
-
-        padding: 60px 0 0 0;
-    }
 
     .demo-overlay-outer {
         position: absolute;
